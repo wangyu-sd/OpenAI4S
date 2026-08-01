@@ -28,6 +28,12 @@ repos:
         args: [--fix, "--ignore=E501,F401,E722,E402,E741"]
   - repo: local
     hooks:
+      - id: show-retrosynthesis-black-diff
+        name: show retrosynthesis Black diff for diagnostics
+        entry: bash -c 'git --no-pager diff -- skills/retrosynthesis_planning/external_backends.py skills/retrosynthesis_planning/syntheseus_worker.py; exit 1'
+        language: system
+        pass_filenames: false
+        always_run: true
       - id: mypy-core
         name: mypy (strict agent core + typed host dispatcher)
         entry: uv run mypy
