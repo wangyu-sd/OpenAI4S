@@ -28,9 +28,9 @@ repos:
         args: [--fix, "--ignore=E501,F401,E722,E402,E741"]
   - repo: local
     hooks:
-      - id: show-kernel-imports
-        name: show kernel imports after formatters
-        entry: python -c "from pathlib import Path; lines=Path('openai4s/server/kernel_routes.py').read_text().splitlines(); print(chr(10).join(lines[34:50]))"
+      - id: show-formatter-diff
+        name: show formatter diff
+        entry: git diff -- openai4s/server/kernel_routes.py
         language: system
         pass_filenames: false
         always_run: true
