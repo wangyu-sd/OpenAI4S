@@ -28,6 +28,13 @@ repos:
         args: [--fix, "--ignore=E501,F401,E722,E402,E741"]
   - repo: local
     hooks:
+      - id: show-kernel-imports
+        name: show kernel imports after formatters
+        entry: python -c "from pathlib import Path; lines=Path('openai4s/server/kernel_routes.py').read_text().splitlines(); print(chr(10).join(lines[34:50]))"
+        language: system
+        pass_filenames: false
+        always_run: true
+        verbose: true
       - id: mypy-core
         name: mypy (strict agent core + typed host dispatcher)
         entry: uv run mypy
